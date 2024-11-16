@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Dashboard</h2>
+
+<div style="display: flex; justify-content: space-between; align-items: flex-start;">
+    <!-- Transactions Table -->
+    <div style="width: 48%;">
+        <h3>Transactions</h3>
+        <table border="1" style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.amount }}</td>
+                    <td>{{ transaction.category }}</td>
+                    <td>{{ transaction.type }}</td>
+                    <td>{{ transaction.date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Financial Chart -->
+    <div style="width: 48%; text-align: center;">
+        <h3>Financial Chart</h3>
+        <img src="data:image/png;base64,{{ chart_url }}" alt="Financial Chart" style="max-width: 100%; height: auto; border: 1px solid #ddd; padding: 5px;">
+    </div>
+</div>
+
+<!-- Current Amount -->
+<h3>balance Amount: {{ current_amount }}</h3>
+
+<!-- Savings Goals -->
+<h3>Savings Goals</h3>
+<table border="1" style="width: 100%; border-collapse: collapse; text-align: left;">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Target Amount</th>
+            <th>Current Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for goal in goals %}
+        <tr>
+            <td>{{ goal.name }}</td>
+            <td>{{ goal.target_amount }}</td>
+            <td>{{ current_amount }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
